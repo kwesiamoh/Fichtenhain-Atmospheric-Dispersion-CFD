@@ -1,0 +1,100 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+FoamFile
+{
+    format          ascii;
+    class           dictionary;
+    object          kinematicCloudProperties;
+}
+
+solution
+{
+    active          true;
+    coupled         false;
+    transient       yes;
+    cellValueSourceCorrection off;
+    interpolationSchemes
+    {
+        rho.air         cell;
+        U.air           cellPoint;
+        mu.air          cell;
+    }
+    integrationSchemes
+    {
+        U               Euler;
+    }
+    sourceTerms
+    {
+        schemes
+        {
+            U               semiImplicit 1;
+        }
+    }
+}
+
+constantProperties
+{
+    parcelTypeId    1;
+    rhoMin          1e-15;
+    minParcelMass   1e-15;
+    rho0            1.225;
+    constantVolume  false;
+    alphaMax        0.001;
+}
+
+subModels
+{
+    particleForces
+    {
+        sphereDrag      ;
+    }
+    injectionModels
+    {
+        stackInjection
+        {
+            type            coneNozzleInjection;
+            SOI             1847;
+            massTotal       1e-06;
+            parcelBasisType mass;
+            injectionMethod disc;
+            flowType        constantVelocity;
+            position        constant ( 816.4 1486 70 );
+            direction       constant ( 0 0 1 );
+            outerDiameter   3.5;
+            innerDiameter   0;
+            duration        60;
+            parcelsPerSecond 3000;
+            flowRateProfile constant 1;
+            UMag            10;
+            thetaInner      constant 0;
+            thetaOuter      constant 0;
+            sizeDistribution
+            {
+                type            uniform;
+                uniformDistribution
+                {
+                    minValue        1e-05;
+                    maxValue        1e-05;
+                }
+            }
+        }
+    }
+    dispersionModel none;
+    patchInteractionModel none;
+    surfaceFilmModel none;
+    collisionModel  none;
+    stochasticCollisionModel none;
+}
+
+cloudFunctions
+{
+}
+
+
+// ************************************************************************* //

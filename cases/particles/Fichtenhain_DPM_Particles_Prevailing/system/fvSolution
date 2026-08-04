@@ -1,0 +1,60 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+FoamFile
+{
+    version         2;
+    format          ascii;
+    class           dictionary;
+    object          fvSolution;
+}
+
+solvers
+{
+    "(p|kinematicCloud:theta)"
+    {
+        solver          GAMG;
+        tolerance       1e-06;
+        relTol          0.05;
+        smoother        GaussSeidel;
+    }
+    "(p|kinematicCloud:theta)Final"
+    {
+        solver          GAMG;
+        tolerance       1e-07;
+        relTol          0;
+        smoother        DICGaussSeidel;
+    }
+    U.air
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       1e-05;
+        relTol          0.1;
+    }
+    U.airFinal
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       1e-06;
+        relTol          0;
+    }
+}
+
+PIMPLE
+{
+    momentumPredictor yes;
+    nOuterCorrectors 2;
+    nCorrectors     2;
+    nNonOrthogonalCorrectors 1;
+    pRefCell        0;
+    pRefValue       0;
+}
+
+
+// ************************************************************************* //
