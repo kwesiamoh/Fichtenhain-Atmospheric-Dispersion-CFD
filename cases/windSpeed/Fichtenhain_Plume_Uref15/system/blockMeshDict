@@ -1,0 +1,165 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Domain dimensions:
+//
+// Terrain:
+// x = 315.5 to 1415.5 m
+// y = 752.0 to 1852.0 m
+// z = -1.76025 to 7.03362 m
+//
+// The horizontal block is placed slightly inside the terrain perimeter
+// so the terrain completely covers the domain floor.
+
+domain
+{
+    xMin    315.6;
+    xMax   1415.4;
+
+    yMin    752.1;
+    yMax   1851.9;
+
+    zMin     -2.5;
+    zMax    250.0;
+
+    xCells     70;
+    yCells     70;
+    zCells     20;
+}
+
+
+scale 1;
+
+
+vertices
+(
+    ($:domain.xMin  $:domain.yMin  $:domain.zMin)   // 0
+    ($:domain.xMax  $:domain.yMin  $:domain.zMin)   // 1
+    ($:domain.xMax  $:domain.yMax  $:domain.zMin)   // 2
+    ($:domain.xMin  $:domain.yMax  $:domain.zMin)   // 3
+
+    ($:domain.xMin  $:domain.yMin  $:domain.zMax)   // 4
+    ($:domain.xMax  $:domain.yMin  $:domain.zMax)   // 5
+    ($:domain.xMax  $:domain.yMax  $:domain.zMax)   // 6
+    ($:domain.xMin  $:domain.yMax  $:domain.zMax)   // 7
+);
+
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7)
+    (
+        $:domain.xCells
+        $:domain.yCells
+        $:domain.zCells
+    )
+
+    // Uniform horizontal spacing.
+    // Vertical cells increase gradually from ground to domain top.
+    simpleGrading (1 1 6)
+);
+
+
+edges
+(
+);
+
+
+boundary
+(
+    west
+    {
+        type patch;
+
+        faces
+        (
+            (0 3 7 4)
+        );
+    }
+
+
+    east
+    {
+        type patch;
+
+        faces
+        (
+            (1 5 6 2)
+        );
+    }
+
+
+    south
+    {
+        type patch;
+
+        faces
+        (
+            (0 4 5 1)
+        );
+    }
+
+
+    north
+    {
+        type patch;
+
+        faces
+        (
+            (3 2 6 7)
+        );
+    }
+
+
+    top
+    {
+        type symmetry;
+
+        faces
+        (
+            (4 7 6 5)
+        );
+    }
+
+
+    groundBase
+    {
+        type wall;
+
+        faces
+        (
+            (0 1 2 3)
+        );
+    }
+);
+
+
+mergePatchPairs
+(
+);
+
+
+// Remove the temporary dictionary after variable substitution.
+#remove (domain)
+
+
+// ************************************************************************* //
+
+
+// Cleanup
+#remove ( domain )
+
+// ************************************************************************* //
