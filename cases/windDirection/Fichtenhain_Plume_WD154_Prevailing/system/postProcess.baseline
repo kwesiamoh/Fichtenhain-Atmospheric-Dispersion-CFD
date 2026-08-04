@@ -1,0 +1,50 @@
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      postProcess.baseline;
+}
+
+functions
+{
+    baselineSample
+    {
+        type sets;
+        libs ("libsampling.so");
+
+        interpolationScheme cellPoint;
+        setFormat raw;
+
+        sets
+        (
+            stackHeight
+            {
+                type cloud;
+                axis xyz;
+                points
+                (
+                    (866.4 1486.0 70)
+                    (916.4 1486.0 70)
+                    (1016.4 1486.0 70)
+                );
+            }
+
+            groundLevel
+            {
+                type cloud;
+                axis xyz;
+                points
+                (
+                    (866.4 1486.0 7)
+                    (916.4 1486.0 7)
+                    (1016.4 1486.0 7)
+                );
+            }
+        );
+
+        fields
+        (
+            T
+        );
+    }
+}

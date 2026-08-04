@@ -1,0 +1,47 @@
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      sampleDict.WD180;
+}
+
+type sets;
+libs ("libsampling.so");
+
+interpolationScheme cellPoint;
+
+setFormat raw;
+
+sets
+(
+    stackHeight
+    {
+        type cloud;
+        axis xyz;
+        points
+        (
+            (816.4 1536.0 70)
+            (816.4 1586.0 70)
+            (816.4 1686.0 70)
+            (816.4 1986.0 70)
+        );
+    }
+
+    groundLevel
+    {
+        type cloud;
+        axis xyz;
+        points
+        (
+            (816.4 1536.0 7)
+            (816.4 1586.0 7)
+            (816.4 1686.0 7)
+            (816.4 1986.0 7)
+        );
+    }
+);
+
+fields
+(
+    T
+);

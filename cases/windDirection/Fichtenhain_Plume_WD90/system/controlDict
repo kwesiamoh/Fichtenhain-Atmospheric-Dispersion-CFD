@@ -1,0 +1,75 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+FoamFile
+{
+    version         2;
+    format          ascii;
+    class           dictionary;
+    object          controlDict;
+}
+
+application     scalarTransportFoam;
+
+libs            ( "libatmosphericModels.so" );
+
+startFrom       latestTime;
+
+startTime       1200;
+
+stopAt          endTime;
+
+endTime         1800;
+
+deltaT          0.02;
+
+writeControl    adjustableRunTime;
+
+writeInterval   2;
+
+purgeWrite      0;
+
+writeFormat     binary;
+
+writePrecision  8;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+functions
+{
+    WD90_probes
+    {
+        type            probes;
+        libs            ("libsampling.so");
+
+        fields
+        (
+            T
+        );
+
+        probeLocations
+        (
+            (766.4 1486.0 70)
+            (716.4 1486.0 70)
+            (616.4 1486.0 70)
+
+            (766.4 1486.0 7)
+            (716.4 1486.0 7)
+            (616.4 1486.0 7)
+        );
+    }
+}
+
+
+// ************************************************************************* //
