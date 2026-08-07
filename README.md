@@ -167,6 +167,11 @@ Four wind directions were examined.
 
 The direction names follow the meteorological convention: the angle describes where the wind comes from.
 
+The prevailing-wind CFD scenario was selected from hourly wind observations obtained from the Deutscher Wetterdienst (DWD) Climate Data Center. DWD station 01078 (Düsseldorf) was used because it provided a long and highly complete hourly wind record in the historical CDC wind dataset used for this study
+<img width="800" height="800" alt="Figure_1" src="https://github.com/user-attachments/assets/2e5b2c13-d9ca-4e9f-9517-2eb4c9a41246" />
+
+
+
 ---
 
 ### Lagrangian particle case
@@ -248,7 +253,6 @@ This result is treated as supporting information rather than one of the main con
 Changing wind direction changed the route followed by the plume through the site.
 
 <img width="1920" height="1080" alt="4in1" src="https://github.com/user-attachments/assets/aeb80a05-3a52-4922-aac5-5ebc452cfe12" />
-**[Figure: Four wind-direction plume pathways at z = 70 m]**
 
 The four cases show the plume travelling approximately:
 
@@ -270,7 +274,6 @@ Eight virtual receptors were positioned on a 200 m radius around the stack:
 All receptors were sampled at the release-height plane, `z = 70 m`.
 
 <img width="792" height="533" alt="Rplot01" src="https://github.com/user-attachments/assets/81ae4bc5-a8d3-4c97-9b92-de5330cedcbd" />
-**[Figure: Directional receptor heatmap]**
 
 The receptor with the highest normalized concentration was located in the expected downwind direction for each case.
 
@@ -292,7 +295,6 @@ These receptors are computational sampling locations. They are not physical moni
 The corrected particle case released 176,913 computational parcels during the simulated release.
 
 <img width="2118" height="1230" alt="particle_mass_balance" src="https://github.com/user-attachments/assets/2a749954-9bc8-4a14-84db-90fa911ad255" />
-**[Figure: Particle mass balance]**
 
 By the end of the analysed period:
 
@@ -308,7 +310,6 @@ This shows the transition from initial accumulation near the source to progressi
 The particle cloud was also analysed in terms of its downwind travel distance.
 
 <img width="2118" height="1230" alt="downwind_transport" src="https://github.com/user-attachments/assets/45a744b1-06dd-48f2-adef-4bb7164a1d77" />
-**[Figure: Downwind particle transport]**
 
 At the final analysed state:
 
