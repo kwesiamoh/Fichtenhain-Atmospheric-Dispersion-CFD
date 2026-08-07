@@ -169,9 +169,9 @@ The direction names follow the meteorological convention: the angle describes wh
 
 ---
 
-### Corrected Lagrangian particle case
+### Lagrangian particle case
 
-The corrected prevailing-wind particle case used an elevated release from the stack.
+The prevailing-wind particle case used an elevated release from the stack.
 
 Main particle settings included:
 
